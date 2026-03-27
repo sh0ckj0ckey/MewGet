@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="src/NoMewing.FluentIcons.Generator/NoMewing.FluentIcons.Generator.csproj" Id="eb3a6c25-d671-48dd-9e53-53d67a2a976e" />
+  <Project Path="src/NoMewing.FluentIcons/NoMewing.FluentIcons.csproj" />
+</Solution>
