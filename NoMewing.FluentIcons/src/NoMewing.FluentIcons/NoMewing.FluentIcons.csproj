@@ -2,14 +2,13 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Nullable>enable</Nullable>
         <IsAotCompatible>true</IsAotCompatible>
+        <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
 
         <PackageId>NoMewing.FluentIcons</PackageId>
         <Title>NoMewing.FluentIcons</Title>
-        <Description>Provides strongly-typed metadata for Segoe Fluent Icons, including glyphs and Unicode mappings.</Description>
-        <Authors>NoMewing</Authors>
+        <Description>Provides strongly typed access to Segoe Fluent Icons.</Description>
         <PackageTags>icons;fluent;segoe;unicode;glyph</PackageTags>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageProjectUrl>https://github.com/sh0ckj0ckey/MewGet/NoMewing.FluentIcons</PackageProjectUrl>
