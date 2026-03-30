@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="src/NoMewing.FluentIcons.Generator/NoMewing.FluentIcons.Generator.csproj" Id="eb3a6c25-d671-48dd-9e53-53d67a2a976e" />
   <Project Path="src/NoMewing.FluentIcons/NoMewing.FluentIcons.csproj" />
+  <Project Path="tests/NoMewing.FluentIcons.Tests/NoMewing.FluentIcons.Tests.csproj" Id="b8b22285-14be-4dc0-91d5-5c9439bd1f2d" />
 </Solution>
