@@ -1,93 +1,113 @@
-﻿using System.Collections.Immutable;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Text;
 using System.Text.Json;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
-namespace NoMewing.FluentIcons.Generator
+namespace NoMewing.FluentIcons.Generator;
+
+[Generator]
+internal sealed class FluentIconsGenerator : IIncrementalGenerator
 {
-    [Generator]
-    internal sealed class FluentIconsGenerator : IIncrementalGenerator
+    public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        public void Initialize(IncrementalGeneratorInitializationContext context)
+        var iconsDataFile = context.AdditionalTextsProvider
+            .Where(static file => string.Equals(Path.GetFileName(file.Path), "IconsData.json", StringComparison.OrdinalIgnoreCase))
+            .Select(static (file, cancellationToken) => file.GetText(cancellationToken)?.ToString());
+
+        context.RegisterSourceOutput(iconsDataFile, static (sourceProductionContext, jsonText) =>
         {
-            var iconsDataFile = context.AdditionalTextsProvider
-                .Where(static file => string.Equals(System.IO.Path.GetFileName(file.Path), "IconsData.json", StringComparison.OrdinalIgnoreCase))
-                .Select(static (file, cancellationToken) => file.GetText(cancellationToken)?.ToString());
-
-            context.RegisterSourceOutput(iconsDataFile, static (sourceProductionContext, jsonText) =>
+            if (jsonText is null || string.IsNullOrWhiteSpace(jsonText))
             {
-                if (string.IsNullOrWhiteSpace(jsonText))
-                {
-                    return;
-                }
-
-                var icons = ParseIcons(jsonText);
-                if (icons.Length == 0)
-                {
-                    return;
-                }
-
-                var source = GenerateSource(icons);
-                sourceProductionContext.AddSource("SegoeFluentIcons.g.cs", SourceText.From(source, Encoding.UTF8));
-            });
-        }
-
-        private static (string Name, char Glyph)[] ParseIcons(string jsonText)
-        {
-            using var document = JsonDocument.Parse(jsonText);
-
-            if (document.RootElement.ValueKind != JsonValueKind.Array)
-            {
-                return Array.Empty<(string Name, char Glyph)>();
+                return;
             }
 
-            var icons = new List<(string Name, char Glyph)>();
-
-            foreach (var element in document.RootElement.EnumerateArray())
+            var icons = ParseIcons(jsonText);
+            if (icons.Length == 0)
             {
-                if (!element.TryGetProperty("Name", out var nameProperty) ||
-                    !element.TryGetProperty("Code", out var codeProperty))
-                {
-                    continue;
-                }
-
-                var name = nameProperty.GetString();
-                var code = codeProperty.GetString();
-
-                if (name is null || code is null)
-                {
-                    continue;
-                }
-
-                if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(code))
-                {
-                    continue;
-                }
-
-                if (!TryParseGlyph(code, out var glyph))
-                {
-                    continue;
-                }
-
-                icons.Add((name, glyph));
+                return;
             }
 
-            return icons.ToArray();
-        }
+            var source = GenerateSource(icons);
+            sourceProductionContext.AddSource("SegoeFluentIcons.g.cs", SourceText.From(source, Encoding.UTF8));
+        });
+    }
 
-        private static bool TryParseGlyph(string code, out char glyph)
+    private static (string Name, string Code)[] ParseIcons(string jsonText)
+    {
+        using var document = JsonDocument.Parse(jsonText);
+
+        if (document.RootElement.ValueKind != JsonValueKind.Array)
         {
-            glyph = default;
+            return Array.Empty<(string Name, string Code)>();
+        }
 
-            if (!ushort.TryParse(code, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var value))
+        var icons = new List<(string Name, string Code)>();
+
+        foreach (var element in document.RootElement.EnumerateArray())
+        {
+            if (!element.TryGetProperty("Name", out var nameProperty) ||
+                !element.TryGetProperty("Code", out var codeProperty))
             {
-                return false;
+                continue;
             }
 
-            glyph = (char)value;
-            return true;
+            var name = nameProperty.GetString()?.Trim();
+            var code = codeProperty.GetString()?.Trim();
+
+            if (name is null || code is null)
+            {
+                continue;
+            }
+
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(code))
+            {
+                continue;
+            }
+
+            icons.Add((name, code));
         }
+
+        return icons.ToArray();
+    }
+
+    private static string GenerateSource((string Name, string Code)[] icons)
+    {
+        var sb = new StringBuilder();
+
+        sb.AppendLine("// <auto-generated/>");
+        sb.AppendLine("namespace NoMewing.FluentIcons;");
+        sb.AppendLine();
+        sb.AppendLine("public static partial class SegoeFluentIcons");
+        sb.AppendLine("{");
+
+        foreach (var icon in icons)
+        {
+            sb.AppendLine("    /// <summary>");
+            sb.Append("    /// Gets the icon named \"");
+            sb.Append(icon.Name);
+            sb.AppendLine("\".");
+            sb.AppendLine("    /// </summary>");
+            sb.Append("    public static IconInfo ");
+            sb.Append(icon.Name);
+            sb.Append(" => new IconInfo(\"");
+            sb.Append(icon.Name);
+            sb.Append("\", ");
+            sb.Append(FormatGlyphLiteral(icon.Code));
+            sb.AppendLine(");");
+            sb.AppendLine();
+        }
+
+        sb.AppendLine("}");
+        return sb.ToString();
+    }
+
+    private static string FormatGlyphLiteral(string code)
+    {
+        var value = ushort.Parse(code, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+        return $"'\\u{value:X4}'";
     }
 }
