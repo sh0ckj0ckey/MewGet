@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\NoMewing.FluentIcons\NoMewing.FluentIcons.csproj" />
+        <ProjectReference Include="..\..\src\NoMewing.SegoeFluentIcons\NoMewing.SegoeFluentIcons.csproj" />
     </ItemGroup>
 
     <ItemGroup>

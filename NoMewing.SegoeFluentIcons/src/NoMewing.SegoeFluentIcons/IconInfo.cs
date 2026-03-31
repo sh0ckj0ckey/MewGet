@@ -1,4 +1,4 @@
-﻿namespace NoMewing.FluentIcons;
+﻿namespace NoMewing.SegoeFluentIcons;
 
 /// <summary>
 /// Represents metadata for an icon.

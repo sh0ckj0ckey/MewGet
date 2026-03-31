@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="src/NoMewing.SegoeFluentIcons.Generator/NoMewing.SegoeFluentIcons.Generator.csproj" Id="eb3a6c25-d671-48dd-9e53-53d67a2a976e" />
+  <Project Path="src/NoMewing.SegoeFluentIcons/NoMewing.SegoeFluentIcons.csproj" />
+  <Project Path="tests/NoMewing.SegoeFluentIcons.Tests/NoMewing.SegoeFluentIcons.Tests.csproj" Id="b8b22285-14be-4dc0-91d5-5c9439bd1f2d" />
+</Solution>

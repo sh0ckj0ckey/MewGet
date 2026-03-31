@@ -6,12 +6,12 @@
         <LangVersion>latest</LangVersion>
         <ImplicitUsings>disable</ImplicitUsings>
 
-        <PackageId>NoMewing.FluentIcons</PackageId>
-        <Title>NoMewing.FluentIcons</Title>
+        <PackageId>NoMewing.SegoeFluentIcons</PackageId>
+        <Title>NoMewing.SegoeFluentIcons</Title>
         <Description>Provides strongly typed access to Segoe Fluent Icons.</Description>
         <PackageTags>icons;fluent;segoe;unicode;glyph</PackageTags>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageProjectUrl>https://github.com/sh0ckj0ckey/MewGet/NoMewing.FluentIcons</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/sh0ckj0ckey/MewGet/NoMewing.SegoeFluentIcons</PackageProjectUrl>
     </PropertyGroup>
 
     <ItemGroup>
@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\NoMewing.FluentIcons.Generator\NoMewing.FluentIcons.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
+        <ProjectReference Include="..\NoMewing.SegoeFluentIcons.Generator\NoMewing.SegoeFluentIcons.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
     </ItemGroup>
 
 </Project>

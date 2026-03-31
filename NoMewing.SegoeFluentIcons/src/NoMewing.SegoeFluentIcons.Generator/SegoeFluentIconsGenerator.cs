@@ -7,10 +7,10 @@ using System.Text.Json;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
-namespace NoMewing.FluentIcons.Generator;
+namespace NoMewing.SegoeFluentIcons.Generator;
 
 [Generator]
-internal sealed class FluentIconsGenerator : IIncrementalGenerator
+internal sealed class SegoeFluentIconsGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
@@ -32,7 +32,7 @@ internal sealed class FluentIconsGenerator : IIncrementalGenerator
             }
 
             var source = GenerateSource(icons);
-            sourceProductionContext.AddSource("SegoeFluentIcons.g.cs", SourceText.From(source, Encoding.UTF8));
+            sourceProductionContext.AddSource("Icons.g.cs", SourceText.From(source, Encoding.UTF8));
         });
     }
 
@@ -82,9 +82,9 @@ internal sealed class FluentIconsGenerator : IIncrementalGenerator
         sb.AppendLine("#nullable enable");
         sb.AppendLine("using System.Collections.Generic;");
         sb.AppendLine();
-        sb.AppendLine("namespace NoMewing.FluentIcons;");
+        sb.AppendLine("namespace NoMewing.SegoeFluentIcons;");
         sb.AppendLine();
-        sb.AppendLine("public static partial class SegoeFluentIcons");
+        sb.AppendLine("public static partial class Icons");
         sb.AppendLine("{");
         sb.AppendLine("    private static IconInfo[]? _allIcons;");
         sb.AppendLine();
