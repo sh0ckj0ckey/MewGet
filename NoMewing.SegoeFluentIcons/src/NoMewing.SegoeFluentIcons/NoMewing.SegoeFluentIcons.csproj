@@ -8,14 +8,18 @@
 
         <PackageId>NoMewing.SegoeFluentIcons</PackageId>
         <Title>NoMewing.SegoeFluentIcons</Title>
+        <Version>0.1.0</Version>
         <Description>Provides strongly typed access to Segoe Fluent Icons.</Description>
-        <PackageTags>icons;fluent;segoe;unicode;glyph</PackageTags>
+        <PackageTags>icons, fluent, segoe, unicode, glyph</PackageTags>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageProjectUrl>https://github.com/sh0ckj0ckey/MewGet/NoMewing.SegoeFluentIcons</PackageProjectUrl>
+        <PackageIcon>icon.png</PackageIcon>
+        <PackageProjectUrl>https://github.com/sh0ckj0ckey/MewGet/tree/main/NoMewing.SegoeFluentIcons</PackageProjectUrl>
+        <PackageReleaseNotes>Initial preview release.</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+        <None Include="..\..\README.md" Pack="true" PackagePath="README.md" />
+        <None Include="..\..\..\assets\icon.png" Pack="true" PackagePath="icon.png" />
     </ItemGroup>
 
     <ItemGroup>
@@ -23,7 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\NoMewing.SegoeFluentIcons.Generator\NoMewing.SegoeFluentIcons.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
+        <ProjectReference Include="..\NoMewing.SegoeFluentIcons.Generator\NoMewing.SegoeFluentIcons.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
 
 </Project>

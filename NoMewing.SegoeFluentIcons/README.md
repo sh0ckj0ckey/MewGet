@@ -1,6 +1,6 @@
 # NoMewing.SegoeFluentIcons
 
-`NoMewing.SegoeFluentIcons` is a small .NET library that provides strongly typed access to the names and glyph characters of **Segoe Fluent Icons**. It uses a source generator to generate the `Icons` API at build time, so you can access icons through simple members such as `Icons.Wifi`, `Icons.Picture`, or `Icons.GetAllIcons()`.
+`NoMewing.SegoeFluentIcons` is a small .NET library that provides strongly typed access to the names and glyph characters of **Segoe Fluent Icons**. This library uses a source generator internally to generate the `Icons` API at build time, so you can access icons through simple members such as `Icons.Wifi`, `Icons.Picture`, or `Icons.GetAllIcons()`.
 
 This library is a metadata library, **not** a control library. It does not render icons by itself and it does not provide XAML controls or UI components. Its purpose is simply to give you a convenient way to get the name and Unicode glyph for each icon in C# code.
 

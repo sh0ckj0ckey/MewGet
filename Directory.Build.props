@@ -1,9 +1,5 @@
 <Project>
   <PropertyGroup>
-    <LangVersion>preview</LangVersion>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-
     <Authors>NoMewing</Authors>
     <Company>NoMewing</Company>
     <RepositoryType>git</RepositoryType>
