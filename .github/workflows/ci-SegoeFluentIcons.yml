@@ -1,0 +1,35 @@
+name: CI - SegoeFluentIcons
+
+on:
+  push:
+    paths:
+      - 'NoMewing.SegoeFluentIcons/**'
+      - 'Directory.Build.props'
+      - '.github/workflows/ci-SegoeFluentIcons.yml'
+  pull_request:
+    paths:
+      - 'NoMewing.SegoeFluentIcons/**'
+      - 'Directory.Build.props'
+      - '.github/workflows/ci-SegoeFluentIcons.yml'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6.0.2
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v5.2.0
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore NoMewing.SegoeFluentIcons/NoMewing.SegoeFluentIcons.slnx
+
+      - name: Build
+        run: dotnet build NoMewing.SegoeFluentIcons/NoMewing.SegoeFluentIcons.slnx --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test NoMewing.SegoeFluentIcons/NoMewing.SegoeFluentIcons.slnx --configuration Release --no-build
