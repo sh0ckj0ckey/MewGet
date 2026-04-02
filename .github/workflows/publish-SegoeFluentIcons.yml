@@ -70,8 +70,9 @@ jobs:
             exit 1
           fi
 
+          echo "Publishing package: $package"
+          dotnet nuget push "$package" --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source "https://api.nuget.org/v3/index.json" --skip-duplicate
+
           echo "Publishing symbols package: $symbols"
           dotnet nuget push "$symbols" --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source "https://api.nuget.org/v3/index.json" --skip-duplicate
           
-          echo "Publishing package: $package"
-          dotnet nuget push "$package" --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source "https://api.nuget.org/v3/index.json" --skip-duplicate
