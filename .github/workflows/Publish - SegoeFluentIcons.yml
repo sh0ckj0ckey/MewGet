@@ -1,0 +1,71 @@
+name: Publish - SegoeFluentIcons
+
+on:
+  push:
+    tags:
+      - 'NoMewing.SegoeFluentIcons-v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6.0.2
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v5.2.0
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Extract and validate version
+        shell: pwsh
+        run: |
+          $prefix = 'NoMewing.SegoeFluentIcons-v'
+          $tagVersion = $env:GITHUB_REF_NAME.Replace($prefix, '')
+
+          [xml]$project = Get-Content 'NoMewing.SegoeFluentIcons/src/NoMewing.SegoeFluentIcons/NoMewing.SegoeFluentIcons.csproj'
+          $projectVersion = $project.Project.PropertyGroup | ForEach-Object { $_.Version } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -First 1
+
+          if ($tagVersion -ne $projectVersion) {
+            throw "Version mismatch: tag '$tagVersion' != project '$projectVersion'"
+          }
+
+          "PACKAGE_VERSION=$projectVersion" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Restore
+        run: dotnet restore NoMewing.SegoeFluentIcons/NoMewing.SegoeFluentIcons.slnx
+
+      - name: Build
+        run: dotnet build NoMewing.SegoeFluentIcons/NoMewing.SegoeFluentIcons.slnx --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test NoMewing.SegoeFluentIcons/NoMewing.SegoeFluentIcons.slnx --configuration Release --no-build
+
+      - name: Pack
+        run: dotnet pack NoMewing.SegoeFluentIcons/src/NoMewing.SegoeFluentIcons/NoMewing.SegoeFluentIcons.csproj --configuration Release --no-restore --no-build --output ./artifacts
+
+      - name: Publish to NuGet
+        shell: bash
+        run: |
+          package="./artifacts/NoMewing.SegoeFluentIcons.${PACKAGE_VERSION}.nupkg"
+          symbols="./artifacts/NoMewing.SegoeFluentIcons.${PACKAGE_VERSION}.snupkg"
+
+          if [ ! -f "$package" ]; then
+            echo "Package not found: $package"
+            exit 1
+          fi
+
+          if [ ! -f "$symbols" ]; then
+            echo "Symbols package not found: $symbols"
+            exit 1
+          fi
+
+          echo "Publishing symbols package: $symbols"
+          dotnet nuget push "$symbols" --source "https://api.nuget.org/v3/index.json" --skip-duplicate
+          
+          echo "Publishing package: $package"
+          dotnet nuget push "$package" --source "https://api.nuget.org/v3/index.json" --skip-duplicate
