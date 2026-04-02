@@ -10,7 +10,7 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
 
     <IncludeSymbols>true</IncludeSymbols>
-    <!-- <SymbolPackageFormat>snupkg</SymbolPackageFormat> -->
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
