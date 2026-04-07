@@ -1,7 +1,6 @@
-<h1>
-  <img src="assets/logo.png" alt="MewGet logo" height="34" style="vertical-align: middle;" />
-  MewGet
-</h1>
+<img src="assets/logo.png" alt="MewGet logo" height="96" />
+
+# MewGet
 
 NuGet packages from NoMewing.
 
