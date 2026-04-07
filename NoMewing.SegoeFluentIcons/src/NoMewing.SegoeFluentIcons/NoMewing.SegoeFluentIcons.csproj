@@ -8,7 +8,7 @@
 
         <PackageId>NoMewing.SegoeFluentIcons</PackageId>
         <Title>NoMewing.SegoeFluentIcons</Title>
-        <Version>0.1.0</Version>
+        <Version>0.1.1</Version>
         <Description>Provides strongly typed access to Segoe Fluent Icons.</Description>
         <PackageTags>icons, fluent, segoe, unicode, glyph</PackageTags>
         <PackageReadmeFile>README.md</PackageReadmeFile>
