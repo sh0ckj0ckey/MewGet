@@ -40,7 +40,7 @@ To display these glyphs correctly, the target environment must have the **Segoe 
 
 ```csharp
 textBlock.FontFamily = new FontFamily("Segoe Fluent Icons");
-textBlock.Text = Icons.Wifi.Glyph.ToString();
+textBlock.Text = NoMewing.SegoeFluentIcons.Icons.Wifi.Glyph.ToString();
 ```
 
 ## Data source
