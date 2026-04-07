@@ -18,8 +18,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\..\README.md" Pack="true" PackagePath="README.md" />
-        <None Include="..\..\..\assets\icon.png" Pack="true" PackagePath="icon.png" />
+        <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+        <None Include="icon.png" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup>
