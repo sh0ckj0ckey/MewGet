@@ -9,7 +9,9 @@ Each package has its own subproject, source code, and tests.
 
 ## Packages
 
-- [NoMewing.SegoeFluentIcons](./NoMewing.SegoeFluentIcons/) - Provides strongly typed access to Segoe Fluent Icons.
+| Icon | Package |
+| --- | --- |
+| <img src="assets/icon-SegoeFluentIcons.png" alt="NoMewing.SegoeFluentIcons icon" width="72" /> | <strong><a href="./NoMewing.SegoeFluentIcons">NoMewing.SegoeFluentIcons</a></strong><br /> Provides strongly typed access to Segoe Fluent Icons. |
 
 ## License
 

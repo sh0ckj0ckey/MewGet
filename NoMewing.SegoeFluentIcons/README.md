@@ -17,7 +17,7 @@ dotnet add package NoMewing.SegoeFluentIcons
 Each icon is represented by an `IconInfo` value that contains its name and glyph character.
 
 ```csharp
-var icon = Icons.Wifi;
+var icon = NoMewing.SegoeFluentIcons.Icons.Wifi;
 
 Console.WriteLine(icon.Name);   // Wifi
 Console.WriteLine(icon.Glyph);  // '\uE701'
@@ -26,7 +26,7 @@ Console.WriteLine(icon.Glyph);  // '\uE701'
 You can also get all available icons:
 
 ```csharp
-var allIcons = Icons.GetAllIcons();
+var allIcons = NoMewing.SegoeFluentIcons.Icons.GetAllIcons();
 
 foreach (var icon in allIcons)
 {
