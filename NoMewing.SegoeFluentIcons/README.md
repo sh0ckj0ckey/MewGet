@@ -47,7 +47,7 @@ textBlock.Text = NoMewing.SegoeFluentIcons.Icons.Wifi.Glyph.ToString();
 
 The icon metadata in this library is based on data from Microsoft's **WinUI Gallery** repository:
 
-https://github.com/microsoft/WinUI-Gallery/tree/main/WinUIGallery/Samples/Data
+https://github.com/microsoft/WinUI-Gallery/blob/main/WinUIGallery/Samples/Iconography/IconsData.json
 
 If the upstream data changes, this package may be updated in a future release.
 
